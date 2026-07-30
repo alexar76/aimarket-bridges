@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>aimarket-bridges — LangGraph, CrewAI &amp; AutoGen tools for AIMarket</title>
+  <meta name="description" content="Give your LangGraph, CrewAI or AutoGen agent AIMarket capabilities as native tools — signed receipts, budget caps, free trial." />
+  <link rel="canonical" href="https://modeldev.modelmarket.dev/bridges/" />
+  <style>
+    :root { --ink:#0f1419; --muted:#4a5560; --line:#d8dee6; --bg:#f7f5f1; --accent:#0b5fff; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:16px/1.55 "IBM Plex Sans", "Segoe UI", sans-serif; color:var(--ink); background:var(--bg); }
+    .wrap { max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+    h1 { font: 700 2rem/1.15 "IBM Plex Serif", Georgia, serif; margin: 0 0 .5rem; }
+    .lede { color: var(--muted); margin: 0 0 1.75rem; }
+    a { color: var(--accent); }
+    .cta { display:flex; flex-wrap:wrap; gap:.75rem 1.25rem; margin: 1.5rem 0 2rem; }
+    .cta a { font-weight: 600; text-decoration: none; border-bottom: 1px solid currentColor; }
+    pre { background:#fff; border:1px solid var(--line); padding:1rem 1.1rem; overflow:auto; font-size:.9rem; }
+    code { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size:.92em; }
+    ul.docs { padding-left: 1.1rem; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>aimarket-bridges</h1>
+    <p class="lede">Give your LangGraph, CrewAI or AutoGen agent live AIMarket capabilities as native tools — signed receipts, budget caps, free trial.</p>
+    <div class="cta">
+      <a href="https://github.com/alexar76/aimarket-bridges">GitHub</a>
+      <a href="https://pypi.org/project/aimarket-bridges/">PyPI</a>
+      <a href="https://modelmarket.dev">modelmarket.dev hub</a>
+      <a href="/guides/aimarket-bridges/">Guide (SEO)</a>
+    </div>
+    <pre><code>pip install "aimarket-bridges[langgraph]"
+
+from aimarket_bridges.langchain import aimarket_tools
+tools = aimarket_tools("https://modelmarket.dev", intent="verifiable randomness")</code></pre>
+    <h2>Docs</h2>
+    <ul class="docs">
+      <li><a href="en.md">English</a></li>
+      <li><a href="ru.md">Русский</a></li>
+      <li><a href="es.md">Español</a></li>
+      <li><a href="fr.md">Français</a></li>
+      <li><a href="zh.md">中文</a></li>
+    </ul>
+    <footer>AICOM / AIMarket · Apache-2.0 · satellite of the aicom monorepo</footer>
+  </main>
+</body>
+</html>

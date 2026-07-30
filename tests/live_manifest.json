@@ -1,0 +1,3846 @@
+{
+ "base_url": "https://modelmarket.dev",
+ "captured": "2026-07-29",
+ "tools": [
+  {
+   "capability_id": "security-rules.sec-feed@v1",
+   "description": "Security rules feed \u2014 regex pattern pack for local secret scanners (category: security)",
+   "input_schema": {
+    "properties": {
+     "ecosystem": {
+      "type": "string"
+     }
+    },
+    "type": "object"
+   },
+   "name": "security-rules.security-rules.sec-feed@v1",
+   "output_schema": {
+    "properties": {
+     "patterns": {
+      "type": "array"
+     },
+     "version": {
+      "type": "string"
+     }
+    },
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "security-rules",
+   "source_hub": "local"
+  },
+  {
+   "capability_id": "skopos.security.posture@v1",
+   "description": "Security score, grade, top alerts and expert remarks for the operator's own fleet (modelmarket.dev). Reports on OUR servers \u2014 the optional server_name filters within that fleet, it does not accept yours.",
+   "input_schema": {
+    "properties": {
+     "server_name": {
+      "description": "Optional single-server filter",
+      "type": "string"
+     }
+    },
+    "type": "object"
+   },
+   "name": "prod-skopos.Security posture@v1",
+   "output_schema": {
+    "properties": {
+     "alerts": {
+      "type": "array"
+     },
+     "critical_count": {
+      "type": "integer"
+     },
+     "fleet_score": {
+      "type": "integer"
+     },
+     "grade": {
+      "type": "string"
+     },
+     "high_count": {
+      "type": "integer"
+     },
+     "remarks": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     }
+    },
+    "type": "object"
+   },
+   "price_per_call_usd": 0.08,
+   "product_id": "prod-skopos",
+   "source_hub": "local"
+  },
+  {
+   "capability_id": "skopos.traffic.summary@v1",
+   "description": "Recent nginx/Apache traffic aggregates \u2014 requests, unique IPs, top segment, error rate \u2014 for the operator's own fleet (modelmarket.dev). Reports on OUR traffic; it does not ingest logs you supply.",
+   "input_schema": {
+    "properties": {
+     "hours": {
+      "default": 24,
+      "maximum": 168,
+      "minimum": 1,
+      "type": "integer"
+     }
+    },
+    "type": "object"
+   },
+   "name": "prod-skopos.Traffic summary@v1",
+   "output_schema": {
+    "properties": {
+     "error_rate_pct": {
+      "type": "number"
+     },
+     "requests": {
+      "type": "integer"
+     },
+     "top_segment": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "unique_ips": {
+      "type": "integer"
+     }
+    },
+    "type": "object"
+   },
+   "price_per_call_usd": 0.05,
+   "product_id": "prod-skopos",
+   "source_hub": "local"
+  },
+  {
+   "capability_id": "skopos.briefing@v1",
+   "description": "Human-language health summary of the operator's own fleet (modelmarket.dev) \u2014 rules-based, LLM-written when a key is configured. Describes OUR fleet, not yours.",
+   "input_schema": {
+    "properties": {
+     "language": {
+      "default": "en",
+      "enum": [
+       "en",
+       "ru",
+       "es"
+      ],
+      "type": "string"
+     }
+    },
+    "type": "object"
+   },
+   "name": "prod-skopos.Fleet health briefing@v1",
+   "output_schema": {
+    "properties": {
+     "fleet_score": {
+      "type": "integer"
+     },
+     "grade": {
+      "type": "string"
+     },
+     "mood": {
+      "type": "string"
+     },
+     "source": {
+      "type": "string"
+     },
+     "text": {
+      "type": "string"
+     }
+    },
+    "type": "object"
+   },
+   "price_per_call_usd": 0.15,
+   "product_id": "prod-skopos",
+   "source_hub": "local"
+  },
+  {
+   "capability_id": "skopos.fleet.status@v1",
+   "description": "Live heartbeat of the operator's own SKOPOS-monitored fleet (modelmarket.dev): servers monitored, request count, security score. Reports on OUR servers, not yours \u2014 a working sample of SKOPOS output.",
+   "input_schema": {
+    "additionalProperties": false,
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-skopos.Fleet status@v1",
+   "output_schema": {
+    "properties": {
+     "ok": {
+      "type": "boolean"
+     },
+     "requests_total": {
+      "type": "integer"
+     },
+     "security_score": {
+      "type": "integer"
+     },
+     "servers_monitored": {
+      "type": "integer"
+     }
+    },
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "prod-skopos",
+   "source_hub": "local"
+  },
+  {
+   "capability_id": "platon.random@v1",
+   "description": "Signed chaos-VRF randomness",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.random@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.004,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.beacon@v1",
+   "description": "Hash-chained randomness beacon round",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.beacon@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.004,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.commit@v1",
+   "description": "Commit-reveal (bias-resistant) randomness",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.commit@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.004,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.oracle@v1",
+   "description": "LLM mathematical witness at bifurcations",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.oracle@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.02,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.ask@v1",
+   "description": "Grounded, read-only informational guide",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.ask@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.003,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.state@v1",
+   "description": "Snapshot of the 32D universe \u2014 telemetry, oscillators, projection",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.state@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.steer@v1",
+   "description": "Semantic steering \u2014 natural language maps to bifurcation parameters",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.steer@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.005,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.project@v1",
+   "description": "Rotate the Stiefel projection \u2014 how the 32D shadow appears in 2D",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.project@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.002,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.dream@v1",
+   "description": "Surrogate vs truth trajectory \u2014 see where prediction dies at chaos",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.dream@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.008,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.reveal@v1",
+   "description": "Commit-reveal randomness, phase 2 \u2014 supply the round",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.reveal@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.004,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "platon.witnesses@v1",
+   "description": "Public feed of oracle testimonies \u2014 chimera births, chaos thresholds",
+   "input_schema": {
+    "properties": {},
+    "type": "object"
+   },
+   "name": "prod-platon.platon.witnesses@v1",
+   "output_schema": {
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-platon",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "chronos.eval@v1",
+   "description": "Verifiable delay function (VDF): proof that real sequential time passed. Evaluates y = g^(2^T) mod N via T sequential squarings, returning y + a Wesolowski proof. Higher difficulty = more enforced sequential time. Anyone can verify without redoing the work.",
+   "input_schema": {
+    "properties": {
+     "difficulty": {
+      "default": 100000,
+      "maximum": 1000000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "seed": {
+      "minLength": 1,
+      "type": "string"
+     }
+    },
+    "required": [
+     "seed"
+    ],
+    "type": "object"
+   },
+   "name": "prod-chronos.chronos.eval@v1",
+   "output_schema": {
+    "properties": {
+     "difficulty": {
+      "type": "integer"
+     },
+     "g": {
+      "type": "string"
+     },
+     "modulus": {
+      "type": "string"
+     },
+     "proof": {
+      "type": "object"
+     },
+     "scheme": {
+      "type": "string"
+     },
+     "y": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "g",
+     "y",
+     "difficulty",
+     "proof"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "prod-chronos",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "chronos.verify@v1",
+   "description": "Verify a verifiable delay function (VDF) proof (\u03c0^l \u00b7 g^r \u2261 y) \u2014 cheap and trustless, no need to redo the sequential work.",
+   "input_schema": {
+    "properties": {
+     "difficulty": {
+      "type": "integer"
+     },
+     "g": {
+      "type": "string"
+     },
+     "proof": {
+      "type": "object"
+     },
+     "y": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "g",
+     "y",
+     "difficulty",
+     "proof"
+    ],
+    "type": "object"
+   },
+   "name": "prod-chronos.chronos.verify@v1",
+   "output_schema": {
+    "properties": {
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-chronos",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "lattice.sequence@v1",
+   "description": "Generate `count` points of the `dim`-dimensional Halton low-discrepancy sequence in [0,1)^dim, using successive coprime prime bases. Quasi-random: fills space more evenly than RNG, so quasi-Monte-Carlo estimators converge faster. Deterministic for given (count, dim, skip).",
+   "input_schema": {
+    "properties": {
+     "count": {
+      "default": 256,
+      "maximum": 4096,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "dim": {
+      "default": 2,
+      "maximum": 8,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "skip": {
+      "default": 0,
+      "minimum": 0,
+      "type": "integer"
+     }
+    },
+    "type": "object"
+   },
+   "name": "prod-lattice.lattice.sequence@v1",
+   "output_schema": {
+    "properties": {
+     "bases": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array"
+     },
+     "count": {
+      "type": "integer"
+     },
+     "dim": {
+      "type": "integer"
+     },
+     "points": {
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "sequence": {
+      "type": "string"
+     },
+     "skip": {
+      "type": "integer"
+     }
+    },
+    "required": [
+     "points",
+     "dim",
+     "count",
+     "bases"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.002,
+   "product_id": "prod-lattice",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "murmuration.aggregate@v1",
+   "description": "Aggregate a list of agent-submitted values into a single robust consensus number. Returns the median, symmetric trimmed mean, Tukey biweight location, and a DeGroot complete-graph consensus value with its iteration count. Outlier- and Byzantine-resistant.",
+   "input_schema": {
+    "properties": {
+     "trim": {
+      "default": 0.1,
+      "description": "Fraction trimmed from each tail for the trimmed mean.",
+      "maximum": 0.499,
+      "minimum": 0.0,
+      "type": "number"
+     },
+     "values": {
+      "description": "Agent-submitted scalar estimates.",
+      "items": {
+       "type": "number"
+      },
+      "minItems": 1,
+      "type": "array"
+     }
+    },
+    "required": [
+     "values"
+    ],
+    "type": "object"
+   },
+   "name": "prod-murmuration.murmuration.aggregate@v1",
+   "output_schema": {
+    "properties": {
+     "biweight": {
+      "type": "number"
+     },
+     "converged_value": {
+      "type": "number"
+     },
+     "iterations": {
+      "type": "integer"
+     },
+     "median": {
+      "type": "number"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "trimmed_mean": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "n",
+     "median",
+     "trimmed_mean",
+     "biweight",
+     "converged_value",
+     "iterations"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.002,
+   "product_id": "prod-murmuration",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "lumen.reputation@v1",
+   "description": "Compute EigenTrust / PageRank reputation over a directed weighted trust graph. Builds a column-stochastic transition matrix with damping (default 0.85), power-iterates to the dominant eigenvector, and returns normalized scores (sum to 1), the iteration count, and convergence. Dangling nodes are handled via uniform teleport.",
+   "input_schema": {
+    "properties": {
+     "damping": {
+      "default": 0.85,
+      "exclusiveMaximum": 1,
+      "exclusiveMinimum": 0,
+      "type": "number"
+     },
+     "edges": {
+      "description": "Directed weighted trust edges [i, j, w]: i trusts j with weight w.",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 3,
+       "minItems": 3,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "nodes": {
+      "maximum": 100000,
+      "minimum": 1,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "nodes",
+     "edges"
+    ],
+    "type": "object"
+   },
+   "name": "prod-lumen.lumen.reputation@v1",
+   "output_schema": {
+    "properties": {
+     "converged": {
+      "type": "boolean"
+     },
+     "iterations": {
+      "type": "integer"
+     },
+     "scores": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "scores",
+     "iterations",
+     "converged"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.005,
+   "product_id": "prod-lumen",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "lumen.score@v1",
+   "description": "Single-agent trust lookup: PageRank score, rank, and percentile for one node in a directed weighted trust graph.",
+   "input_schema": {
+    "properties": {
+     "damping": {
+      "default": 0.85,
+      "exclusiveMaximum": 1,
+      "exclusiveMinimum": 0,
+      "type": "number"
+     },
+     "edges": {
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 3,
+       "minItems": 3,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "nodes": {
+      "maximum": 100000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "target_node": {
+      "minimum": 0,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "nodes",
+     "edges",
+     "target_node"
+    ],
+    "type": "object"
+   },
+   "name": "prod-lumen.lumen.score@v1",
+   "output_schema": {
+    "properties": {
+     "of": {
+      "type": "integer"
+     },
+     "percentile": {
+      "type": "number"
+     },
+     "rank": {
+      "type": "integer"
+     },
+     "score": {
+      "type": "number"
+     },
+     "target_node": {
+      "type": "integer"
+     }
+    },
+    "required": [
+     "target_node",
+     "score",
+     "rank",
+     "of",
+     "percentile"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.003,
+   "product_id": "prod-lumen",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "lumen.verify@v1",
+   "description": "Re-derive PageRank over the supplied graph and check claimed scores match the fixed point (trustless spot-check).",
+   "input_schema": {
+    "properties": {
+     "damping": {
+      "default": 0.85,
+      "exclusiveMaximum": 1,
+      "exclusiveMinimum": 0,
+      "type": "number"
+     },
+     "edges": {
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 3,
+       "minItems": 3,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "graph_commitment": {
+      "type": "string"
+     },
+     "nodes": {
+      "maximum": 100000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "scores": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "nodes",
+     "edges",
+     "scores"
+    ],
+    "type": "object"
+   },
+   "name": "prod-lumen.lumen.verify@v1",
+   "output_schema": {
+    "properties": {
+     "error": {
+      "type": "string"
+     },
+     "max_abs_diff": {
+      "type": "number"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.002,
+   "product_id": "prod-lumen",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "colony.optimize@v1",
+   "description": "Optimize a tour over >=3 2D points: nearest-neighbour + 2-opt. Returns the tour (a permutation), its length, an admissible lower bound (sum of each node's cheapest incident edge / 2), and gap = (length - lower_bound) / lower_bound. The gap is a certificate of how far from optimal the tour can possibly be.",
+   "input_schema": {
+    "properties": {
+     "iterations": {
+      "default": 1000,
+      "description": "2-opt improvement budget.",
+      "maximum": 100000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "points": {
+      "description": "List of [x, y] coordinates (at least 3).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "minItems": 3,
+      "type": "array"
+     }
+    },
+    "required": [
+     "points"
+    ],
+    "type": "object"
+   },
+   "name": "prod-colony.colony.optimize@v1",
+   "output_schema": {
+    "properties": {
+     "gap": {
+      "type": "number"
+     },
+     "length": {
+      "type": "number"
+     },
+     "lower_bound": {
+      "type": "number"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "nn_length": {
+      "type": "number"
+     },
+     "tour": {
+      "items": {
+       "type": "integer"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "tour",
+     "length",
+     "lower_bound",
+     "gap",
+     "n"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.005,
+   "product_id": "prod-colony",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "turing.bluenoise@v1",
+   "description": "Generate `count` blue-noise points in [0,1)^2 (Mitchell's best-candidate). Returns the points, count and the measured minimum pairwise distance. Pass `seed` for a reproducible set; omit it for a fresh os.urandom seed (reported back). `candidates` (default 10) trades cost for spacing quality.",
+   "input_schema": {
+    "properties": {
+     "candidates": {
+      "default": 10,
+      "description": "random candidates considered per placement",
+      "maximum": 1024,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "count": {
+      "description": "number of points to generate",
+      "maximum": 2048,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "seed": {
+      "description": "optional seed for a reproducible set",
+      "type": "integer"
+     }
+    },
+    "required": [
+     "count"
+    ],
+    "type": "object"
+   },
+   "name": "prod-turing.turing.bluenoise@v1",
+   "output_schema": {
+    "properties": {
+     "candidates": {
+      "type": "integer"
+     },
+     "count": {
+      "type": "integer"
+     },
+     "min_distance": {
+      "type": "number"
+     },
+     "points": {
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "seed": {
+      "type": "integer"
+     },
+     "seed_source": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "points",
+     "count",
+     "min_distance"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.002,
+   "product_id": "prod-turing",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "percola.threshold@v1",
+   "description": "Analyse a graph's connectivity resilience. Removes high-leverage nodes (deterministic greedy 'targeted' order) and a committed-seed 'random' baseline, tracking the giant component P_inf and second cluster S2. Returns f_c (critical attack fraction) for each attack, the collapse curves, a 0..1 robustness scalar (area under targeted P_inf), the keystone node set, and a graph_commitment for trustless replay.",
+   "input_schema": {
+    "properties": {
+     "attack": {
+      "default": "both",
+      "enum": [
+       "targeted",
+       "random",
+       "both"
+      ],
+      "type": "string"
+     },
+     "edges": {
+      "description": "Undirected edges as [u, v] label pairs (directed input is symmetrised).",
+      "items": {
+       "items": {
+        "type": [
+         "string",
+         "integer"
+        ]
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "nodes": {
+      "description": "Optional explicit node labels (isolated nodes that have no edges).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "nonce": {
+      "default": "0",
+      "description": "Commit-reveal nonce for the random-attack baseline seed.",
+      "type": [
+       "string",
+       "integer"
+      ]
+     },
+     "samples": {
+      "default": 50,
+      "description": "Resolution of the collapse curve (number of f samples).",
+      "maximum": 200,
+      "minimum": 2,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "edges"
+    ],
+    "type": "object"
+   },
+   "name": "prod-percola.percola.threshold@v1",
+   "output_schema": {
+    "properties": {
+     "graph_commitment": {
+      "type": "string"
+     },
+     "m": {
+      "type": "integer"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "random": {
+      "properties": {
+       "curve": {
+        "items": {
+         "properties": {
+          "f": {
+           "type": "number"
+          },
+          "p_inf": {
+           "type": "number"
+          },
+          "removed": {
+           "type": "integer"
+          },
+          "s2": {
+           "type": "number"
+          }
+         },
+         "type": "object"
+        },
+        "type": "array"
+       },
+       "f_c": {
+        "type": "number"
+       },
+       "nonce": {
+        "type": "string"
+       },
+       "order_hash": {
+        "type": "string"
+       },
+       "seed": {
+        "type": "string"
+       }
+      },
+      "type": "object"
+     },
+     "robustness": {
+      "type": "number"
+     },
+     "samples": {
+      "type": "integer"
+     },
+     "targeted": {
+      "properties": {
+       "curve": {
+        "items": {
+         "properties": {
+          "f": {
+           "type": "number"
+          },
+          "p_inf": {
+           "type": "number"
+          },
+          "removed": {
+           "type": "integer"
+          },
+          "s2": {
+           "type": "number"
+          }
+         },
+         "type": "object"
+        },
+        "type": "array"
+       },
+       "f_c": {
+        "type": "number"
+       },
+       "keystones": {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       "order_hash": {
+        "type": "string"
+       }
+      },
+      "type": "object"
+     }
+    },
+    "required": [
+     "n",
+     "m",
+     "graph_commitment"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "prod-percola",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "percola.verify@v1",
+   "description": "Trustless verification: re-derive the canonical graph, reconstruct the removal order (greedy for targeted; seed for random), replay the union-find sweep, and check the claimed f_c against the recomputed value. Cheap; needs no trust in the oracle.",
+   "input_schema": {
+    "properties": {
+     "attack": {
+      "default": "targeted",
+      "enum": [
+       "targeted",
+       "random"
+      ],
+      "type": "string"
+     },
+     "edges": {
+      "description": "Undirected edges as [u, v] label pairs (directed input is symmetrised).",
+      "items": {
+       "items": {
+        "type": [
+         "string",
+         "integer"
+        ]
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "f_c": {
+      "description": "Claimed critical attack fraction to check.",
+      "type": "number"
+     },
+     "nodes": {
+      "description": "Optional explicit node labels (isolated nodes that have no edges).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "nonce": {
+      "default": "0",
+      "type": [
+       "string",
+       "integer"
+      ]
+     },
+     "samples": {
+      "default": 50,
+      "description": "Resolution of the collapse curve (number of f samples).",
+      "maximum": 200,
+      "minimum": 2,
+      "type": "integer"
+     },
+     "seed": {
+      "description": "16-hex random-attack seed (alternative to nonce).",
+      "type": "string"
+     }
+    },
+    "required": [
+     "edges",
+     "f_c"
+    ],
+    "type": "object"
+   },
+   "name": "prod-percola.percola.verify@v1",
+   "output_schema": {
+    "properties": {
+     "attack": {
+      "type": "string"
+     },
+     "claimed_f_c": {
+      "type": "number"
+     },
+     "graph_commitment": {
+      "type": "string"
+     },
+     "order_hash": {
+      "type": "string"
+     },
+     "recomputed_f_c": {
+      "type": "number"
+     },
+     "seed": {
+      "type": "string"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid",
+     "graph_commitment",
+     "recomputed_f_c"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-percola",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "fermat.route@v1",
+   "description": "Compute the globally least-time (least-cost) composition path from 'start' to 'goal' over a directed weighted service graph, plus the eikonal potential T(v) for every node and a dual optimality certificate. Edge weight is the refractive index n(u,v) >= 0 (cost + latency + risk). Returns path, total, potentials, graph_commitment and certificate{path_edges,...} for trustless replay.",
+   "input_schema": {
+    "properties": {
+     "blend": {
+      "description": "Refractive-index blend coefficients for dict-shaped edges: {cost,latency,reputation,latency_scale}. Defaults {1,1,1,1000}.",
+      "properties": {
+       "cost": {
+        "type": "number"
+       },
+       "latency": {
+        "type": "number"
+       },
+       "latency_scale": {
+        "type": "number"
+       },
+       "reputation": {
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "edges": {
+      "description": "Directed weighted edges. Two shapes are accepted and may be mixed: (a) [u, v, weight] where weight is the already-blended non-negative refractive index n(u,v); or (b) {from,to, cost?, latency?, reputation?} where the index is derived as a*cost + b*(latency/scale) + c*(1-reputation) using 'blend'. A bare [u, v] is weight 0.",
+      "items": {
+       "oneOf": [
+        {
+         "maxItems": 3,
+         "minItems": 2,
+         "type": "array"
+        },
+        {
+         "properties": {
+          "cost": {
+           "minimum": 0,
+           "type": "number"
+          },
+          "from": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "latency": {
+           "minimum": 0,
+           "type": "number"
+          },
+          "n": {
+           "minimum": 0,
+           "type": "number"
+          },
+          "reputation": {
+           "maximum": 1,
+           "minimum": 0,
+           "type": "number"
+          },
+          "source": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "target": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "to": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "u": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "v": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "weight": {
+           "minimum": 0,
+           "type": "number"
+          }
+         },
+         "type": "object"
+        }
+       ]
+      },
+      "type": "array"
+     },
+     "goal": {
+      "type": [
+       "string",
+       "integer"
+      ]
+     },
+     "nodes": {
+      "description": "Optional explicit node labels (e.g. isolated nodes).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "start": {
+      "type": [
+       "string",
+       "integer"
+      ]
+     }
+    },
+    "required": [
+     "edges",
+     "start",
+     "goal"
+    ],
+    "type": "object"
+   },
+   "name": "prod-fermat.fermat.route@v1",
+   "output_schema": {
+    "properties": {
+     "blend": {
+      "type": "object"
+     },
+     "certificate": {
+      "properties": {
+       "feasibility": {
+        "type": "string"
+       },
+       "kind": {
+        "type": "string"
+       },
+       "path_edges": {
+        "type": "array"
+       },
+       "tightness": {
+        "type": "string"
+       }
+      },
+      "type": "object"
+     },
+     "goal": {
+      "type": "string"
+     },
+     "graph_commitment": {
+      "type": "string"
+     },
+     "m": {
+      "type": "integer"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "path": {
+      "items": {
+       "type": "string"
+      },
+      "type": [
+       "array",
+       "null"
+      ]
+     },
+     "potentials": {
+      "additionalProperties": {
+       "type": [
+        "number",
+        "null"
+       ]
+      },
+      "description": "Eikonal potential T(v) = least cost-to-reach, keyed by node label (null = unreachable).",
+      "type": "object"
+     },
+     "reachable": {
+      "type": "boolean"
+     },
+     "start": {
+      "type": "string"
+     },
+     "total": {
+      "type": [
+       "number",
+       "null"
+      ]
+     }
+    },
+    "required": [
+     "path",
+     "total",
+     "potentials",
+     "graph_commitment",
+     "certificate"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "prod-fermat",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "fermat.verify@v1",
+   "description": "Trustless verification of a least-time route via its dual certificate. Re-derives the canonical graph and refractive indices, then checks the supplied potentials T(v) for FEASIBILITY (T(v) <= T(u)+n(u,v) on every edge) and the supplied path for TIGHTNESS (T(v) == T(u)+n(u,v) on every path edge, grounded T(start)=0). Both holding proves the path is globally optimal \u2014 checked in O(E), no Dijkstra, no trust in the oracle.",
+   "input_schema": {
+    "properties": {
+     "blend": {
+      "description": "Refractive-index blend coefficients for dict-shaped edges: {cost,latency,reputation,latency_scale}. Defaults {1,1,1,1000}.",
+      "properties": {
+       "cost": {
+        "type": "number"
+       },
+       "latency": {
+        "type": "number"
+       },
+       "latency_scale": {
+        "type": "number"
+       },
+       "reputation": {
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "edges": {
+      "description": "Directed weighted edges. Two shapes are accepted and may be mixed: (a) [u, v, weight] where weight is the already-blended non-negative refractive index n(u,v); or (b) {from,to, cost?, latency?, reputation?} where the index is derived as a*cost + b*(latency/scale) + c*(1-reputation) using 'blend'. A bare [u, v] is weight 0.",
+      "items": {
+       "oneOf": [
+        {
+         "maxItems": 3,
+         "minItems": 2,
+         "type": "array"
+        },
+        {
+         "properties": {
+          "cost": {
+           "minimum": 0,
+           "type": "number"
+          },
+          "from": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "latency": {
+           "minimum": 0,
+           "type": "number"
+          },
+          "n": {
+           "minimum": 0,
+           "type": "number"
+          },
+          "reputation": {
+           "maximum": 1,
+           "minimum": 0,
+           "type": "number"
+          },
+          "source": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "target": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "to": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "u": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "v": {
+           "type": [
+            "string",
+            "integer"
+           ]
+          },
+          "weight": {
+           "minimum": 0,
+           "type": "number"
+          }
+         },
+         "type": "object"
+        }
+       ]
+      },
+      "type": "array"
+     },
+     "goal": {
+      "type": [
+       "string",
+       "integer"
+      ]
+     },
+     "nodes": {
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "path": {
+      "description": "Claimed optimal path start -> goal (node labels in order).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "potentials": {
+      "additionalProperties": {
+       "type": [
+        "number",
+        "null"
+       ]
+      },
+      "description": "Eikonal potential T(v) = least cost-to-reach, keyed by node label (null = unreachable).",
+      "type": "object"
+     },
+     "start": {
+      "type": [
+       "string",
+       "integer"
+      ]
+     },
+     "total": {
+      "description": "Optional claimed total to match against T(goal).",
+      "type": "number"
+     }
+    },
+    "required": [
+     "edges",
+     "potentials",
+     "start",
+     "goal"
+    ],
+    "type": "object"
+   },
+   "name": "prod-fermat.fermat.verify@v1",
+   "output_schema": {
+    "properties": {
+     "claimed_total": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "edges_checked": {
+      "type": "integer"
+     },
+     "feasible": {
+      "type": "boolean"
+     },
+     "first_violation": {
+      "type": [
+       "array",
+       "null"
+      ]
+     },
+     "graph_commitment": {
+      "type": "string"
+     },
+     "reasons": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "recomputed_total": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "source_grounded": {
+      "type": "boolean"
+     },
+     "tight": {
+      "type": "boolean"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid",
+     "feasible",
+     "tight",
+     "graph_commitment"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-fermat",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "ablation.cascade@v1",
+   "description": "Analyse a network's systemic cascade risk. Treats the exposure graph as an abelian sandpile, drives `grains` unit shocks on a committed pseudo-random schedule, and stabilises after each via a topple queue. Returns the avalanche size distribution, the MLE power-law exponent tau + KS fit, the mean and tail (VaR/CVaR 95% & 99%) avalanche size, the top trigger nodes, a config_commitment and the committed seed for trustless replay. Small tau / heavy tail = one default ripples across the whole market.",
+   "input_schema": {
+    "properties": {
+     "capacities": {
+      "additionalProperties": {
+       "minimum": 1,
+       "type": "integer"
+      },
+      "description": "Optional per-node toppling threshold (capacity), label->int>=1. Defaults to the node's out-degree (canonical BTW rule).",
+      "type": "object"
+     },
+     "dissipation": {
+      "default": 1,
+      "description": "Grains leaked to the open boundary per topple (the system's leak rate). >=1 (default) guarantees criticality + termination on any graph; 0 = perfectly conservative (dissipation only at explicit sinks / dead-ends).",
+      "minimum": 0,
+      "type": "integer"
+     },
+     "edges": {
+      "description": "Directed exposure edges as [u, v] label pairs: stress flows u->v (u depends on / owes v, so u's distress lands on v).",
+      "items": {
+       "items": {
+        "type": [
+         "string",
+         "integer"
+        ]
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "grains": {
+      "default": 4000,
+      "description": "Number of unit stress grains to drive into the system.",
+      "maximum": 20000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "nodes": {
+      "description": "Optional explicit node labels (e.g. isolated counterparties with no edges).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "nonce": {
+      "default": "0",
+      "description": "Commit-reveal nonce for the drive-schedule seed = H(config_commitment || nonce).",
+      "type": [
+       "string",
+       "integer"
+      ]
+     },
+     "s_min": {
+      "default": 1,
+      "description": "Lower cutoff for the power-law MLE fit (fit only avalanches of size >= s_min).",
+      "minimum": 1,
+      "type": "integer"
+     },
+     "sinks": {
+      "description": "Optional sink nodes that dissipate grains and never topple (boundary).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "thresholds": {
+      "additionalProperties": {
+       "minimum": 1,
+       "type": "integer"
+      },
+      "description": "Alias for 'capacities'.",
+      "type": "object"
+     }
+    },
+    "required": [
+     "edges"
+    ],
+    "type": "object"
+   },
+   "name": "prod-ablation.ablation.cascade@v1",
+   "output_schema": {
+    "properties": {
+     "config_commitment": {
+      "type": "string"
+     },
+     "cvar95": {
+      "type": "number"
+     },
+     "cvar99": {
+      "type": "number"
+     },
+     "dissipation": {
+      "type": "integer"
+     },
+     "distribution": {
+      "description": "Avalanche-size distribution as {size, count} pairs (log-log power-law support).",
+      "items": {
+       "properties": {
+        "count": {
+         "type": "integer"
+        },
+        "size": {
+         "type": "integer"
+        }
+       },
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "grains": {
+      "type": "integer"
+     },
+     "ks": {
+      "type": "number"
+     },
+     "m": {
+      "type": "integer"
+     },
+     "max_avalanche": {
+      "type": "integer"
+     },
+     "mean_avalanche": {
+      "type": "number"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "n_avalanches": {
+      "type": "integer"
+     },
+     "nonce": {
+      "type": "string"
+     },
+     "s_min": {
+      "type": "integer"
+     },
+     "seed": {
+      "type": "string"
+     },
+     "tau": {
+      "type": "number"
+     },
+     "topple_total": {
+      "type": "integer"
+     },
+     "triggers": {
+      "items": {
+       "properties": {
+        "avalanches_seeded": {
+         "type": "integer"
+        },
+        "big_cascades": {
+         "type": "integer"
+        },
+        "node": {
+         "type": "string"
+        },
+        "total_cascade_mass": {
+         "type": "integer"
+        }
+       },
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "var95": {
+      "properties": {
+       "cvar": {
+        "type": "number"
+       },
+       "quantile": {
+        "type": "number"
+       },
+       "var": {
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "var99": {
+      "properties": {
+       "cvar": {
+        "type": "number"
+       },
+       "quantile": {
+        "type": "number"
+       },
+       "var": {
+        "type": "number"
+       }
+      },
+      "type": "object"
+     }
+    },
+    "required": [
+     "n",
+     "m",
+     "config_commitment",
+     "tau",
+     "topple_total"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "prod-ablation",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "ablation.verify@v1",
+   "description": "Trustless verification: re-derive the canonical config, replay the driven-dissipative sandpile over the committed schedule (seed = H(config_commitment || nonce), or a supplied seed), recompute the order-independent topple total and power-law tau, and check them against the claimed values. The abelian theorem guarantees bit-for-bit reproduction regardless of relaxation order. Cheap; needs no trust in the oracle.",
+   "input_schema": {
+    "properties": {
+     "capacities": {
+      "additionalProperties": {
+       "minimum": 1,
+       "type": "integer"
+      },
+      "description": "Optional per-node toppling threshold (capacity), label->int>=1. Defaults to the node's out-degree (canonical BTW rule).",
+      "type": "object"
+     },
+     "claimed_tau": {
+      "description": "Claimed power-law exponent to check.",
+      "type": "number"
+     },
+     "claimed_topple_total": {
+      "description": "Claimed total topple count to check.",
+      "type": "integer"
+     },
+     "dissipation": {
+      "default": 1,
+      "description": "Grains leaked to the open boundary per topple (the system's leak rate). >=1 (default) guarantees criticality + termination on any graph; 0 = perfectly conservative (dissipation only at explicit sinks / dead-ends).",
+      "minimum": 0,
+      "type": "integer"
+     },
+     "edges": {
+      "description": "Directed exposure edges as [u, v] label pairs: stress flows u->v (u depends on / owes v, so u's distress lands on v).",
+      "items": {
+       "items": {
+        "type": [
+         "string",
+         "integer"
+        ]
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "grains": {
+      "default": 4000,
+      "description": "Number of unit stress grains to drive into the system.",
+      "maximum": 20000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "nodes": {
+      "description": "Optional explicit node labels (e.g. isolated counterparties with no edges).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "nonce": {
+      "default": "0",
+      "description": "Commit-reveal nonce for the drive-schedule seed = H(config_commitment || nonce).",
+      "type": [
+       "string",
+       "integer"
+      ]
+     },
+     "s_min": {
+      "default": 1,
+      "description": "Lower cutoff for the power-law MLE fit (fit only avalanches of size >= s_min).",
+      "minimum": 1,
+      "type": "integer"
+     },
+     "seed": {
+      "description": "16-hex drive seed (alternative to nonce).",
+      "type": "string"
+     },
+     "sinks": {
+      "description": "Optional sink nodes that dissipate grains and never topple (boundary).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "thresholds": {
+      "additionalProperties": {
+       "minimum": 1,
+       "type": "integer"
+      },
+      "description": "Alias for 'capacities'.",
+      "type": "object"
+     }
+    },
+    "required": [
+     "edges"
+    ],
+    "type": "object"
+   },
+   "name": "prod-ablation.ablation.verify@v1",
+   "output_schema": {
+    "properties": {
+     "claimed_tau": {
+      "type": [
+       "number",
+       "null"
+      ]
+     },
+     "claimed_topple_total": {
+      "type": [
+       "integer",
+       "null"
+      ]
+     },
+     "config_commitment": {
+      "type": "string"
+     },
+     "nonce": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "recomputed_tau": {
+      "type": "number"
+     },
+     "recomputed_topple_total": {
+      "type": "integer"
+     },
+     "seed": {
+      "type": "string"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid",
+     "config_commitment",
+     "recomputed_topple_total",
+     "recomputed_tau"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-ablation",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "landauer.audit@v1",
+   "description": "Audit a computation's thermodynamic cost. Topologically traverses the op-DAG, counts logically-irreversible bit-erasures per gate (lossy fan-in / explicit erase), and returns: irreversible_bits, energy_floor_j (irreversible_bits \u00b7 k_B\u00b7T\u00b7ln2), the Bennett reversible lower bound (reversible_bits) and the avoidable wasteful_bits, a 0..1 efficiency, the per-gate hot-spot list, and a circuit_commitment for trustless replay.",
+   "input_schema": {
+    "properties": {
+     "ops": {
+      "description": "The operation DAG. Each element is a gate node {id, gate, inputs:[id,...], width?}. 'inputs' are the ids of the nodes this gate reads (its data dependencies / fan-in). Reversible gates (not, copy/fanout, swap, cnot, toffoli, fredkin, input, output) erase 0 bits; boolean reductions (and, or, nand, mux, add, ...) erase fan_in-1 bits; width-erasers (erase, reset, measure, ...) erase 'width' bits.",
+      "items": {
+       "properties": {
+        "gate": {
+         "description": "Gate type (case-insensitive).",
+         "type": "string"
+        },
+        "id": {
+         "description": "Unique node id.",
+         "type": [
+          "string",
+          "integer"
+         ]
+        },
+        "inputs": {
+         "description": "Ids of predecessor nodes (data dependencies).",
+         "items": {
+          "type": [
+           "string",
+           "integer"
+          ]
+         },
+         "type": "array"
+        },
+        "width": {
+         "description": "Bit-width for width-erasers / register sources.",
+         "maximum": 4096,
+         "minimum": 0,
+         "type": "integer"
+        }
+       },
+       "required": [
+        "id",
+        "gate"
+       ],
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "temperature_k": {
+      "default": 300.0,
+      "description": "Environment temperature in kelvin (sets the kT\u00b7ln2 bit cost).",
+      "maximum": 1000000.0,
+      "minimum": 0.001,
+      "type": "number"
+     }
+    },
+    "required": [
+     "ops"
+    ],
+    "type": "object"
+   },
+   "name": "prod-landauer.landauer.audit@v1",
+   "output_schema": {
+    "properties": {
+     "bit_cost_j": {
+      "type": "number"
+     },
+     "circuit_commitment": {
+      "type": "string"
+     },
+     "efficiency": {
+      "type": "number"
+     },
+     "energy_floor_j": {
+      "type": "number"
+     },
+     "hot_gates": {
+      "items": {
+       "properties": {
+        "erased_bits": {
+         "type": "integer"
+        },
+        "gate": {
+         "type": "string"
+        },
+        "id": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "irreversible_bits": {
+      "type": "integer"
+     },
+     "n_edges": {
+      "type": "integer"
+     },
+     "n_ops": {
+      "type": "integer"
+     },
+     "reversible_bits": {
+      "type": "integer"
+     },
+     "reversible_floor_j": {
+      "type": "number"
+     },
+     "temperature_k": {
+      "type": "number"
+     },
+     "wasteful_bits": {
+      "type": "integer"
+     }
+    },
+    "required": [
+     "irreversible_bits",
+     "energy_floor_j",
+     "circuit_commitment"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "prod-landauer",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "landauer.verify@v1",
+   "description": "Trustless verification: re-derive the canonical circuit, replay the topological erasure count, recompute the energy floor, and check the claimed irreversible_bits and/or energy_floor_j bit-for-bit. Cheap; needs no trust in the oracle. Supply at least one of the two claims.",
+   "input_schema": {
+    "properties": {
+     "energy_floor_j": {
+      "description": "Claimed Landauer energy floor in joules to check.",
+      "minimum": 0,
+      "type": "number"
+     },
+     "irreversible_bits": {
+      "description": "Claimed irreversible bit-erasure count to check.",
+      "minimum": 0,
+      "type": "integer"
+     },
+     "ops": {
+      "description": "The operation DAG. Each element is a gate node {id, gate, inputs:[id,...], width?}. 'inputs' are the ids of the nodes this gate reads (its data dependencies / fan-in). Reversible gates (not, copy/fanout, swap, cnot, toffoli, fredkin, input, output) erase 0 bits; boolean reductions (and, or, nand, mux, add, ...) erase fan_in-1 bits; width-erasers (erase, reset, measure, ...) erase 'width' bits.",
+      "items": {
+       "properties": {
+        "gate": {
+         "description": "Gate type (case-insensitive).",
+         "type": "string"
+        },
+        "id": {
+         "description": "Unique node id.",
+         "type": [
+          "string",
+          "integer"
+         ]
+        },
+        "inputs": {
+         "description": "Ids of predecessor nodes (data dependencies).",
+         "items": {
+          "type": [
+           "string",
+           "integer"
+          ]
+         },
+         "type": "array"
+        },
+        "width": {
+         "description": "Bit-width for width-erasers / register sources.",
+         "maximum": 4096,
+         "minimum": 0,
+         "type": "integer"
+        }
+       },
+       "required": [
+        "id",
+        "gate"
+       ],
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "temperature_k": {
+      "default": 300.0,
+      "description": "Environment temperature in kelvin (sets the kT\u00b7ln2 bit cost).",
+      "maximum": 1000000.0,
+      "minimum": 0.001,
+      "type": "number"
+     }
+    },
+    "required": [
+     "ops"
+    ],
+    "type": "object"
+   },
+   "name": "prod-landauer.landauer.verify@v1",
+   "output_schema": {
+    "properties": {
+     "bits_match": {
+      "type": "boolean"
+     },
+     "circuit_commitment": {
+      "type": "string"
+     },
+     "claimed_energy_floor_j": {
+      "type": "number"
+     },
+     "claimed_irreversible_bits": {
+      "type": "integer"
+     },
+     "energy_floor_j": {
+      "type": "number"
+     },
+     "energy_match": {
+      "type": "boolean"
+     },
+     "recomputed_irreversible_bits": {
+      "type": "integer"
+     },
+     "temperature_k": {
+      "type": "number"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid",
+     "circuit_commitment",
+     "recomputed_irreversible_bits",
+     "energy_floor_j"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-landauer",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "sortes.draw@v1",
+   "description": "Draw verifiable randomness for an input alpha. Computes the ECVRF proof pi and output beta with the oracle's secret key (never returned), binding the result to (public_key, alpha). Returns the public_key, the proof components (gamma, c, s, pi), beta, and `output` (num_bytes of uniform randomness). Anyone can re-verify offline with sortes.verify@v1.",
+   "input_schema": {
+    "properties": {
+     "alpha": {
+      "description": "Client seed/message. UTF-8 by default; prefix 'hex:' for raw bytes.",
+      "type": "string"
+     },
+     "num_bytes": {
+      "default": 32,
+      "description": "Length of the derived uniform `output` (beta is 64 bytes).",
+      "maximum": 64,
+      "minimum": 1,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "alpha"
+    ],
+    "type": "object"
+   },
+   "name": "prod-sortes.sortes.draw@v1",
+   "output_schema": {
+    "properties": {
+     "alpha": {
+      "type": "string"
+     },
+     "beta": {
+      "type": "string"
+     },
+     "c": {
+      "type": "string"
+     },
+     "gamma": {
+      "type": "string"
+     },
+     "num_bytes": {
+      "type": "integer"
+     },
+     "output": {
+      "type": "string"
+     },
+     "pi": {
+      "type": "string"
+     },
+     "public_key": {
+      "type": "string"
+     },
+     "s": {
+      "type": "string"
+     },
+     "suite": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "public_key",
+     "alpha",
+     "pi",
+     "beta",
+     "output",
+     "suite"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.006,
+   "product_id": "prod-sortes",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "sortes.verify@v1",
+   "description": "Verify an ECVRF proof offline and trustlessly. Given (public_key, alpha, pi) returns valid:true with the canonical beta iff the proof is the unique correct VRF output for that (public_key, alpha); otherwise valid:false. Needs no trust in the oracle.",
+   "input_schema": {
+    "properties": {
+     "alpha": {
+      "description": "The input that was drawn (UTF-8 or 'hex:' raw).",
+      "type": "string"
+     },
+     "pi": {
+      "description": "The 80-byte ECVRF proof (hex).",
+      "type": "string"
+     },
+     "public_key": {
+      "description": "VRF public key (32-byte hex).",
+      "type": "string"
+     }
+    },
+    "required": [
+     "public_key",
+     "alpha",
+     "pi"
+    ],
+    "type": "object"
+   },
+   "name": "prod-sortes.sortes.verify@v1",
+   "output_schema": {
+    "properties": {
+     "beta": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-sortes",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "gauss.field@v1",
+   "description": "GP posterior over a query field. Fits the RBF kernel to (X, y) and returns the predictive mean and variance (and std) at every query point \u2014 the calibrated uncertainty band that collapses to the noise floor at observations and breathes out to the prior sigma_f^2 far from data.",
+   "input_schema": {
+    "properties": {
+     "X": {
+      "description": "Training inputs (n \u00d7 d).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "hyperparams": {
+      "description": "Optional RBF-kernel hyperparameters; sane / heuristic defaults fill any omitted.",
+      "properties": {
+       "length_scale": {
+        "description": "RBF length-scale l (default: median pairwise distance).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       },
+       "noise_var": {
+        "description": "Observation noise sigma_n^2 (default: 1e-6).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       },
+       "signal_var": {
+        "description": "Signal variance sigma_f^2 (default: var(y)).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "query": {
+      "description": "Query inputs (m \u00d7 d) to predict at.",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "y": {
+      "description": "Training targets (n).",
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "X",
+     "y",
+     "query"
+    ],
+    "type": "object"
+   },
+   "name": "prod-gauss.gauss.field@v1",
+   "output_schema": {
+    "properties": {
+     "d": {
+      "type": "integer"
+     },
+     "hyperparams": {
+      "properties": {
+       "length_scale": {
+        "type": "number"
+       },
+       "noise_var": {
+        "type": "number"
+       },
+       "signal_var": {
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "mean": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "std": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "var": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "mean",
+     "var",
+     "std",
+     "n",
+     "d"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.006,
+   "product_id": "prod-gauss",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "gauss.suggest@v1",
+   "description": "Best next experiment by Expected Improvement. Given (X, y) and either an explicit candidate set or bounds+grid, fits the GP and ranks candidates by EI(x) = (mu - f_best - xi)\u00b7Phi(z) + std\u00b7phi(z). Returns the argmax point, its EI, and the full acquisition vector \u2014 a calibrated alternative to hand-tuned UCB / bandit exploration. Supports max or min goals.",
+   "input_schema": {
+    "properties": {
+     "X": {
+      "description": "Training inputs (n \u00d7 d).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "bounds": {
+      "description": "Per-dimension [lo, hi] box, swept by an auto grid (alternative to candidates).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "candidates": {
+      "description": "Explicit candidate points (c \u00d7 d).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "goal": {
+      "default": "max",
+      "enum": [
+       "max",
+       "min"
+      ],
+      "type": "string"
+     },
+     "grid": {
+      "default": 64,
+      "description": "Per-axis grid resolution when using bounds (capped to stay bounded).",
+      "minimum": 2,
+      "type": "integer"
+     },
+     "hyperparams": {
+      "description": "Optional RBF-kernel hyperparameters; sane / heuristic defaults fill any omitted.",
+      "properties": {
+       "length_scale": {
+        "description": "RBF length-scale l (default: median pairwise distance).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       },
+       "noise_var": {
+        "description": "Observation noise sigma_n^2 (default: 1e-6).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       },
+       "signal_var": {
+        "description": "Signal variance sigma_f^2 (default: var(y)).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "xi": {
+      "default": 0.01,
+      "description": "EI exploration margin.",
+      "minimum": 0,
+      "type": "number"
+     },
+     "y": {
+      "description": "Training targets (n).",
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "X",
+     "y"
+    ],
+    "type": "object"
+   },
+   "name": "prod-gauss.gauss.suggest@v1",
+   "output_schema": {
+    "properties": {
+     "acquisition": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "best": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "ei": {
+      "type": "number"
+     },
+     "f_best": {
+      "type": "number"
+     },
+     "goal": {
+      "type": "string"
+     },
+     "hyperparams": {
+      "properties": {
+       "length_scale": {
+        "type": "number"
+       },
+       "noise_var": {
+        "type": "number"
+       },
+       "signal_var": {
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "index": {
+      "type": "integer"
+     },
+     "n_candidates": {
+      "type": "integer"
+     }
+    },
+    "required": [
+     "best",
+     "ei",
+     "acquisition",
+     "index"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.006,
+   "product_id": "prod-gauss",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "gauss.verify@v1",
+   "description": "Trustless replay: recompute the GP posterior at one or a few query points and check the claimed mean / variance match within a tolerance. Cheap; needs no trust in the oracle that produced the original field.",
+   "input_schema": {
+    "properties": {
+     "X": {
+      "description": "Training inputs (n \u00d7 d).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "claimed_mean": {
+      "description": "Claimed posterior mean to check.",
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "claimed_var": {
+      "description": "Claimed posterior variance to check.",
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "hyperparams": {
+      "description": "Optional RBF-kernel hyperparameters; sane / heuristic defaults fill any omitted.",
+      "properties": {
+       "length_scale": {
+        "description": "RBF length-scale l (default: median pairwise distance).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       },
+       "noise_var": {
+        "description": "Observation noise sigma_n^2 (default: 1e-6).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       },
+       "signal_var": {
+        "description": "Signal variance sigma_f^2 (default: var(y)).",
+        "exclusiveMinimum": 0,
+        "type": "number"
+       }
+      },
+      "type": "object"
+     },
+     "query": {
+      "description": "Query inputs (m \u00d7 d) to recompute at.",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "tol": {
+      "default": 1e-06,
+      "description": "Max absolute error allowed.",
+      "type": "number"
+     },
+     "y": {
+      "description": "Training targets (n).",
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "X",
+     "y",
+     "query"
+    ],
+    "type": "object"
+   },
+   "name": "prod-gauss.gauss.verify@v1",
+   "output_schema": {
+    "properties": {
+     "max_abs_err": {
+      "type": "number"
+     },
+     "recomputed_mean": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "recomputed_var": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "tol": {
+      "type": "number"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid",
+     "recomputed_mean",
+     "recomputed_var",
+     "max_abs_err"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-gauss",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "aestus.seal@v1",
+   "description": "Time-lock data: generate a fresh modulus N, compute b = a^(2^T) mod N via T sequential squarings, encrypt under SHA256(b), and burn the factorization. Returns a self-contained puzzle anyone can later open \u2014 the trapdoor is never returned (so the oracle cannot open early). Higher T = longer enforced delay before unlock.",
+   "input_schema": {
+    "properties": {
+     "T": {
+      "default": 1000000,
+      "description": "Sequential squarings = enforced delay before the puzzle opens.",
+      "maximum": 5000000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "data": {
+      "description": "Plaintext to seal (utf8 string, or hex if encoding='hex').",
+      "minLength": 0,
+      "type": "string"
+     },
+     "encoding": {
+      "default": "utf8",
+      "enum": [
+       "utf8",
+       "hex"
+      ],
+      "type": "string"
+     },
+     "modulus_bits": {
+      "default": 1024,
+      "maximum": 3072,
+      "minimum": 256,
+      "type": "integer"
+     }
+    },
+    "required": [
+     "data"
+    ],
+    "type": "object"
+   },
+   "name": "prod-aestus.aestus.seal@v1",
+   "output_schema": {
+    "properties": {
+     "N": {
+      "description": "Fresh RSA modulus N=p\u00b7q (factors burned at seal).",
+      "type": "string"
+     },
+     "T": {
+      "maximum": 5000000,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "a": {
+      "description": "Base; b = a^(2^T) mod N.",
+      "type": "string"
+     },
+     "ciphertext": {
+      "description": "hex; plaintext XOR SHA256-CTR(key).",
+      "type": "string"
+     },
+     "encoding": {
+      "enum": [
+       "utf8",
+       "hex"
+      ],
+      "type": "string"
+     },
+     "key_commitment": {
+      "description": "SHA256 commitment binding the unlock value b.",
+      "type": "string"
+     },
+     "modulus_bits": {
+      "type": "integer"
+     },
+     "scheme": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "scheme",
+     "N",
+     "a",
+     "T",
+     "ciphertext",
+     "key_commitment",
+     "modulus_bits"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.006,
+   "product_id": "prod-aestus",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "aestus.open@v1",
+   "description": "Open a time-lock puzzle: redo the T sequential squarings to recover b = a^(2^T) mod N, derive the key, decrypt, and check b against the puzzle's key_commitment. Anyone can call this once enough time has elapsed \u2014 no trapdoor needed. Costs T squarings.",
+   "input_schema": {
+    "properties": {
+     "puzzle": {
+      "properties": {
+       "N": {
+        "description": "Fresh RSA modulus N=p\u00b7q (factors burned at seal).",
+        "type": "string"
+       },
+       "T": {
+        "maximum": 5000000,
+        "minimum": 1,
+        "type": "integer"
+       },
+       "a": {
+        "description": "Base; b = a^(2^T) mod N.",
+        "type": "string"
+       },
+       "ciphertext": {
+        "description": "hex; plaintext XOR SHA256-CTR(key).",
+        "type": "string"
+       },
+       "encoding": {
+        "enum": [
+         "utf8",
+         "hex"
+        ],
+        "type": "string"
+       },
+       "key_commitment": {
+        "description": "SHA256 commitment binding the unlock value b.",
+        "type": "string"
+       },
+       "modulus_bits": {
+        "type": "integer"
+       },
+       "scheme": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "N",
+       "a",
+       "T",
+       "ciphertext",
+       "key_commitment"
+      ],
+      "type": "object"
+     }
+    },
+    "required": [
+     "puzzle"
+    ],
+    "type": "object"
+   },
+   "name": "prod-aestus.aestus.open@v1",
+   "output_schema": {
+    "properties": {
+     "b": {
+      "description": "Recovered unlock value a^(2^T) mod N.",
+      "type": "string"
+     },
+     "data": {
+      "type": "string"
+     },
+     "valid": {
+      "description": "True iff b matches the key_commitment.",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "data",
+     "b",
+     "valid"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.01,
+   "product_id": "prod-aestus",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "aestus.verify@v1",
+   "description": "Cheap, trustless check that a claimed unlock value b is the correct result of the squarings: SHA256-commitment(b) == puzzle key_commitment, in ~one hash. Lets a worker who already opened the puzzle publish b so others confirm the unlock without redoing T squarings.",
+   "input_schema": {
+    "properties": {
+     "b": {
+      "description": "Claimed result of the squarings (a^(2^T) mod N).",
+      "type": "string"
+     },
+     "puzzle": {
+      "properties": {
+       "N": {
+        "description": "Fresh RSA modulus N=p\u00b7q (factors burned at seal).",
+        "type": "string"
+       },
+       "T": {
+        "maximum": 5000000,
+        "minimum": 1,
+        "type": "integer"
+       },
+       "a": {
+        "description": "Base; b = a^(2^T) mod N.",
+        "type": "string"
+       },
+       "ciphertext": {
+        "description": "hex; plaintext XOR SHA256-CTR(key).",
+        "type": "string"
+       },
+       "encoding": {
+        "enum": [
+         "utf8",
+         "hex"
+        ],
+        "type": "string"
+       },
+       "key_commitment": {
+        "description": "SHA256 commitment binding the unlock value b.",
+        "type": "string"
+       },
+       "modulus_bits": {
+        "type": "integer"
+       },
+       "scheme": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "N",
+       "a",
+       "T",
+       "ciphertext",
+       "key_commitment"
+      ],
+      "type": "object"
+     }
+    },
+    "required": [
+     "puzzle",
+     "b"
+    ],
+    "type": "object"
+   },
+   "name": "prod-aestus.aestus.verify@v1",
+   "output_schema": {
+    "properties": {
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-aestus",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "betti.homology@v1",
+   "description": "Compute the persistent homology of a point cloud. Returns Betti numbers b0/b1/b2 at max_scale, the full Betti curve b_k(scale), and the persistence diagram per dimension. Scale defaults to half the cloud diameter; set max_dim=1 to skip voids (cheaper). Hard-capped at 300 points / 150k simplices \u2014 clipping is reported, never silent.",
+   "input_schema": {
+    "properties": {
+     "max_dim": {
+      "default": 2,
+      "description": "Top homology dimension (1 = b0,b1; 2 = also b2/voids).",
+      "enum": [
+       1,
+       2
+      ],
+      "type": "integer"
+     },
+     "max_scale": {
+      "description": "Filtration ceiling; default = half the cloud diameter.",
+      "exclusiveMinimum": 0,
+      "type": "number"
+     },
+     "num_steps": {
+      "default": 40,
+      "description": "Resolution of the Betti curve.",
+      "maximum": 200,
+      "minimum": 2,
+      "type": "integer"
+     },
+     "points": {
+      "description": "Point cloud as an n\u00d7d array of real coordinates (n capped at 300).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "points"
+    ],
+    "type": "object"
+   },
+   "name": "prod-betti.betti.homology@v1",
+   "output_schema": {
+    "properties": {
+     "b0_unionfind": {
+      "type": "integer"
+     },
+     "betti": {
+      "properties": {
+       "b0": {
+        "type": "integer"
+       },
+       "b1": {
+        "type": "integer"
+       },
+       "b2": {
+        "type": "integer"
+       }
+      },
+      "type": "object"
+     },
+     "betti_curve": {
+      "items": {
+       "properties": {
+        "b0": {
+         "type": "integer"
+        },
+        "b1": {
+         "type": "integer"
+        },
+        "b2": {
+         "type": "integer"
+        },
+        "scale": {
+         "type": "number"
+        }
+       },
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "capped": {
+      "type": "boolean"
+     },
+     "d": {
+      "type": "integer"
+     },
+     "diagram": {
+      "properties": {
+       "0": {
+        "description": "Persistence intervals [birth, death] (death may be 'inf' for essential bars).",
+        "items": {
+         "items": {
+          "type": "number"
+         },
+         "maxItems": 2,
+         "minItems": 2,
+         "type": "array"
+        },
+        "type": "array"
+       },
+       "1": {
+        "description": "Persistence intervals [birth, death] (death may be 'inf' for essential bars).",
+        "items": {
+         "items": {
+          "type": "number"
+         },
+         "maxItems": 2,
+         "minItems": 2,
+         "type": "array"
+        },
+        "type": "array"
+       },
+       "2": {
+        "description": "Persistence intervals [birth, death] (death may be 'inf' for essential bars).",
+        "items": {
+         "items": {
+          "type": "number"
+         },
+         "maxItems": 2,
+         "minItems": 2,
+         "type": "array"
+        },
+        "type": "array"
+       }
+      },
+      "type": "object"
+     },
+     "max_dim": {
+      "type": "integer"
+     },
+     "max_scale": {
+      "type": "number"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "notes": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "simplices_count": {
+      "type": "integer"
+     }
+    },
+    "required": [
+     "n",
+     "d",
+     "betti",
+     "betti_curve",
+     "diagram",
+     "max_scale",
+     "simplices_count",
+     "capped"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.008,
+   "product_id": "prod-betti",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "betti.distance@v1",
+   "description": "Bottleneck distance between the persistence diagrams of two point clouds in one homology dimension (default b1/loops). The basis-free drift metric: ~0 when the two clouds share a topology, clearly positive when the shape changed (a loop appeared/vanished, components merged, a void opened). Exact matching on the capped diagrams.",
+   "input_schema": {
+    "properties": {
+     "dim": {
+      "default": 1,
+      "description": "Homology dimension to compare (0=components, 1=loops, 2=voids).",
+      "enum": [
+       0,
+       1,
+       2
+      ],
+      "type": "integer"
+     },
+     "max_scale": {
+      "description": "Shared filtration ceiling; default = max half-diameter of the two.",
+      "exclusiveMinimum": 0,
+      "type": "number"
+     },
+     "points_a": {
+      "description": "Point cloud as an n\u00d7d array of real coordinates (n capped at 300).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "points_b": {
+      "description": "Point cloud as an n\u00d7d array of real coordinates (n capped at 300).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "points_a",
+     "points_b"
+    ],
+    "type": "object"
+   },
+   "name": "prod-betti.betti.distance@v1",
+   "output_schema": {
+    "properties": {
+     "bottleneck": {
+      "type": "number"
+     },
+     "diagram_a": {
+      "description": "Persistence intervals [birth, death] (death may be 'inf' for essential bars).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "diagram_b": {
+      "description": "Persistence intervals [birth, death] (death may be 'inf' for essential bars).",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 2,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "dim": {
+      "type": "integer"
+     },
+     "max_scale": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "dim",
+     "bottleneck",
+     "diagram_a",
+     "diagram_b"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.004,
+   "product_id": "prod-betti",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "kantor.transport@v1",
+   "description": "Solve the discrete optimal-transport problem from source distribution a to sink distribution b under ground cost C (or points + metric/p). Returns the optimal transport plan, the cost, the p-Wasserstein distance (when the cost is a p-th power of a metric), and the Kantorovich dual potentials (u, v) \u2014 the certificate. method='exact' (default) is solved by min-cost flow and is certifiable; method='sinkhorn' is an explicitly approximate entropic upper bound carrying its regulariser eps.",
+   "input_schema": {
+    "properties": {
+     "a": {
+      "description": "Source distribution weights (len m; renormalised to sum 1).",
+      "items": {
+       "type": "number"
+      },
+      "maxItems": 64,
+      "type": "array"
+     },
+     "b": {
+      "description": "Sink distribution weights (len n; renormalised to sum 1).",
+      "items": {
+       "type": "number"
+      },
+      "maxItems": 64,
+      "type": "array"
+     },
+     "cost": {
+      "description": "Explicit m*n ground-cost matrix C (non-negative). Mutually exclusive with points.",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 64,
+       "type": "array"
+      },
+      "maxItems": 64,
+      "type": "array"
+     },
+     "eps": {
+      "default": 0.1,
+      "description": "Entropic regulariser for method='sinkhorn' (smaller = closer to exact).",
+      "minimum": 0,
+      "type": "number"
+     },
+     "method": {
+      "default": "exact",
+      "enum": [
+       "exact",
+       "sinkhorn"
+      ],
+      "type": "string"
+     },
+     "metric": {
+      "default": "euclidean",
+      "enum": [
+       "euclidean",
+       "sqeuclidean"
+      ],
+      "type": "string"
+     },
+     "p": {
+      "default": 2,
+      "description": "Order of the Wasserstein distance (W_p); ground cost = distance**p.",
+      "minimum": 0,
+      "type": "number"
+     },
+     "sink_points": {
+      "description": "Point coordinates (k-D); the cost matrix is derived via 'metric' and 'p'.",
+      "items": {
+       "oneOf": [
+        {
+         "items": {
+          "type": "number"
+         },
+         "maxItems": 64,
+         "type": "array"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "type": "array"
+     },
+     "source_points": {
+      "description": "Point coordinates (k-D); the cost matrix is derived via 'metric' and 'p'.",
+      "items": {
+       "oneOf": [
+        {
+         "items": {
+          "type": "number"
+         },
+         "maxItems": 64,
+         "type": "array"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "a",
+     "b"
+    ],
+    "type": "object"
+   },
+   "name": "prod-kantor.kantor.transport@v1",
+   "output_schema": {
+    "properties": {
+     "approximate": {
+      "type": "boolean"
+     },
+     "certificate": {
+      "type": "object"
+     },
+     "cost": {
+      "type": "number"
+     },
+     "dual_objective": {
+      "type": "number"
+     },
+     "m": {
+      "type": "integer"
+     },
+     "method": {
+      "type": "string"
+     },
+     "metric": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "n": {
+      "type": "integer"
+     },
+     "p": {
+      "type": "number"
+     },
+     "plan": {
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 64,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "potentials": {
+      "description": "Kantorovich dual potentials: u over sources (len m), v over sinks (len n).",
+      "properties": {
+       "u": {
+        "items": {
+         "type": "number"
+        },
+        "maxItems": 64,
+        "type": "array"
+       },
+       "v": {
+        "items": {
+         "type": "number"
+        },
+        "maxItems": 64,
+        "type": "array"
+       }
+      },
+      "required": [
+       "u",
+       "v"
+      ],
+      "type": "object"
+     },
+     "regularizer_eps": {
+      "type": "number"
+     },
+     "wasserstein": {
+      "type": [
+       "number",
+       "null"
+      ]
+     }
+    },
+    "required": [
+     "method",
+     "cost",
+     "plan",
+     "potentials",
+     "m",
+     "n"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.006,
+   "product_id": "prod-kantor",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "kantor.verify@v1",
+   "description": "Trustless verification of an optimal-transport cost via a TWO-SIDED primal-dual certificate. Given a, b, C (or points), a claimed_cost, the transport plan P and the Kantorovich potentials (u, v), checks PRIMAL FEASIBILITY (P>=0, row-sums==a, col-sums==b) with <P,C> == claimed_cost (an upper bound) AND DUAL FEASIBILITY u_i + v_j <= C_ij on every (i,j) with claimed_cost == sum a_i u_i + sum b_j v_j (a lower bound). Both bounds meeting at claimed_cost certifies the exact optimum; a dual-only check would accept an under-reported cost. Checked in O(m*n), no re-solve, no trust.",
+   "input_schema": {
+    "properties": {
+     "a": {
+      "items": {
+       "type": "number"
+      },
+      "maxItems": 64,
+      "type": "array"
+     },
+     "b": {
+      "items": {
+       "type": "number"
+      },
+      "maxItems": 64,
+      "type": "array"
+     },
+     "claimed_cost": {
+      "description": "The transport cost to certify.",
+      "type": "number"
+     },
+     "cost": {
+      "description": "Explicit m*n ground-cost matrix C (non-negative). Mutually exclusive with points.",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 64,
+       "type": "array"
+      },
+      "maxItems": 64,
+      "type": "array"
+     },
+     "metric": {
+      "default": "euclidean",
+      "enum": [
+       "euclidean",
+       "sqeuclidean"
+      ],
+      "type": "string"
+     },
+     "p": {
+      "default": 2,
+      "minimum": 0,
+      "type": "number"
+     },
+     "plan": {
+      "description": "Primal transport plan P (m*n, row-sums==a, col-sums==b, P>=0). Required by kantor.verify: it upper-bounds the optimum so a dual-only cert can't under-report.",
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "maxItems": 64,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "potentials": {
+      "description": "Kantorovich dual potentials: u over sources (len m), v over sinks (len n).",
+      "properties": {
+       "u": {
+        "items": {
+         "type": "number"
+        },
+        "maxItems": 64,
+        "type": "array"
+       },
+       "v": {
+        "items": {
+         "type": "number"
+        },
+        "maxItems": 64,
+        "type": "array"
+       }
+      },
+      "required": [
+       "u",
+       "v"
+      ],
+      "type": "object"
+     },
+     "sink_points": {
+      "description": "Point coordinates (k-D); the cost matrix is derived via 'metric' and 'p'.",
+      "items": {
+       "oneOf": [
+        {
+         "items": {
+          "type": "number"
+         },
+         "maxItems": 64,
+         "type": "array"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "type": "array"
+     },
+     "source_points": {
+      "description": "Point coordinates (k-D); the cost matrix is derived via 'metric' and 'p'.",
+      "items": {
+       "oneOf": [
+        {
+         "items": {
+          "type": "number"
+         },
+         "maxItems": 64,
+         "type": "array"
+        },
+        {
+         "type": "number"
+        }
+       ]
+      },
+      "type": "array"
+     },
+     "tol": {
+      "default": 1e-06,
+      "description": "Relative tolerance (scaled by max|C| for cost checks) for feasibility, duality and the primal-cost match.",
+      "type": "number"
+     }
+    },
+    "required": [
+     "a",
+     "b",
+     "claimed_cost",
+     "plan",
+     "potentials"
+    ],
+    "type": "object"
+   },
+   "name": "prod-kantor.kantor.verify@v1",
+   "output_schema": {
+    "properties": {
+     "claimed_cost": {
+      "type": "number"
+     },
+     "dual_objective": {
+      "type": "number"
+     },
+     "duality_gap": {
+      "type": "number"
+     },
+     "feasible": {
+      "type": "boolean"
+     },
+     "m": {
+      "type": "integer"
+     },
+     "marginal_violation": {
+      "type": "number"
+     },
+     "max_violation": {
+      "type": "number"
+     },
+     "min_plan_entry": {
+      "type": "number"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "primal_cost": {
+      "type": "number"
+     },
+     "primal_cost_matches": {
+      "type": "boolean"
+     },
+     "primal_feasible": {
+      "type": "boolean"
+     },
+     "primal_gap": {
+      "type": "number"
+     },
+     "strong_duality": {
+      "type": "boolean"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid",
+     "dual_objective",
+     "primal_cost",
+     "claimed_cost",
+     "max_violation"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-kantor",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "fourier.spectrum@v1",
+   "description": "Spectral analysis of a graph. Builds the (normalized or combinatorial) Laplacian, runs an exact symmetric eigendecomposition (numpy.linalg.eigh), and returns the bottom k eigenvalues, the Fiedler value \u03bb\u2082 and Fiedler vector, the spectral cut (two sets + cut size + conductance), and the (v\u2082, v\u2083, v\u2084) spectral embedding per node. The combinatorial \u03bb\u2082 is always reported alongside. Includes a graph_commitment for trustless replay.",
+   "input_schema": {
+    "properties": {
+     "edges": {
+      "description": "Undirected edges as [u, v] label pairs, or weighted [u, v, w] triples.",
+      "items": {
+       "items": {
+        "type": [
+         "string",
+         "integer",
+         "number"
+        ]
+       },
+       "maxItems": 3,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "k": {
+      "default": 6,
+      "description": "Number of smallest eigenvalues to return.",
+      "maximum": 400,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "laplacian": {
+      "default": "normalized",
+      "description": "Symmetric normalized (scale-invariant, spectrum [0,2]) or combinatorial L = D \u2212 A.",
+      "enum": [
+       "normalized",
+       "combinatorial"
+      ],
+      "type": "string"
+     },
+     "nodes": {
+      "description": "Optional explicit node labels (covers isolated nodes that have no edges).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "edges"
+    ],
+    "type": "object"
+   },
+   "name": "prod-fourier.fourier.spectrum@v1",
+   "output_schema": {
+    "properties": {
+     "combinatorial_lambda2": {
+      "type": "number"
+     },
+     "eigenvalues": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "embedding": {
+      "items": {
+       "items": {
+        "type": "number"
+       },
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "fiedler_value": {
+      "type": "number"
+     },
+     "fiedler_vector": {
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     },
+     "graph_commitment": {
+      "type": "string"
+     },
+     "laplacian": {
+      "type": "string"
+     },
+     "m": {
+      "type": "integer"
+     },
+     "n": {
+      "type": "integer"
+     },
+     "nodes": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "spectral_cut": {
+      "properties": {
+       "conductance": {
+        "type": "number"
+       },
+       "cut_size": {
+        "type": "number"
+       },
+       "set_a": {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       },
+       "set_b": {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       }
+      },
+      "type": "object"
+     }
+    },
+    "required": [
+     "n",
+     "m",
+     "laplacian",
+     "eigenvalues",
+     "fiedler_value",
+     "graph_commitment"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.005,
+   "product_id": "prod-fourier",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  },
+  {
+   "capability_id": "fourier.verify@v1",
+   "description": "Trustless eigenpair certificate. Given the graph and a claimed (\u03bb, x), checks the eigen-relation \u2016L x \u2212 \u03bb x\u2016 / \u2016x\u2016 \u2264 tol and that x is orthogonal to the trivial \u03bb\u2081 eigenvector (a genuinely non-trivial mode). This certifies in O(E) that \u03bb is a valid non-trivial Laplacian eigenvalue, hence \u03bb \u2265 \u03bb\u2082 \u2014 a certified UPPER BOUND on the algebraic connectivity (lambda2_upper_bound), NOT a proof that \u03bb equals the Fiedler value. No full eigendecomposition, no trust in the oracle.",
+   "input_schema": {
+    "properties": {
+     "edges": {
+      "description": "Undirected edges as [u, v] label pairs, or weighted [u, v, w] triples.",
+      "items": {
+       "items": {
+        "type": [
+         "string",
+         "integer",
+         "number"
+        ]
+       },
+       "maxItems": 3,
+       "minItems": 2,
+       "type": "array"
+      },
+      "type": "array"
+     },
+     "lambda": {
+      "description": "Claimed eigenvalue to certify.",
+      "type": "number"
+     },
+     "laplacian": {
+      "default": "normalized",
+      "description": "Symmetric normalized (scale-invariant, spectrum [0,2]) or combinatorial L = D \u2212 A.",
+      "enum": [
+       "normalized",
+       "combinatorial"
+      ],
+      "type": "string"
+     },
+     "nodes": {
+      "description": "Optional explicit node labels (covers isolated nodes that have no edges).",
+      "items": {
+       "type": [
+        "string",
+        "integer"
+       ]
+      },
+      "type": "array"
+     },
+     "tol": {
+      "default": 1e-06,
+      "type": "number"
+     },
+     "vector": {
+      "description": "Claimed eigenvector, in the canonical (sorted-label) node order.",
+      "items": {
+       "type": "number"
+      },
+      "type": "array"
+     }
+    },
+    "required": [
+     "edges",
+     "lambda",
+     "vector"
+    ],
+    "type": "object"
+   },
+   "name": "prod-fourier.fourier.verify@v1",
+   "output_schema": {
+    "properties": {
+     "error": {
+      "type": "string"
+     },
+     "graph_commitment": {
+      "type": "string"
+     },
+     "is_eigenpair": {
+      "type": "boolean"
+     },
+     "is_nontrivial": {
+      "type": "boolean"
+     },
+     "lambda2_upper_bound": {
+      "description": "Present iff valid: a certified upper bound \u03bb \u2265 \u03bb\u2082 (NOT a proof \u03bb = \u03bb\u2082).",
+      "type": "number"
+     },
+     "orthogonality": {
+      "type": "number"
+     },
+     "residual": {
+      "type": "number"
+     },
+     "valid": {
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "valid",
+     "residual",
+     "orthogonality",
+     "graph_commitment"
+    ],
+    "type": "object"
+   },
+   "price_per_call_usd": 0.001,
+   "product_id": "prod-fourier",
+   "source_hub": "https://oracles.modelmarket.dev/family"
+  }
+ ]
+}

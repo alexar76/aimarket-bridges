@@ -1,0 +1,98 @@
+[project]
+# `aimarket-bridges`, inside the namespace this project owns. The unprefixed short names on
+# PyPI belong to other people and install colliding modules — see
+# oracles/core/pyproject.toml for the incident that made this a rule here.
+name = "aimarket-bridges"
+version = "0.1.0"
+description = "Use AIMarket capabilities as native tools in LangChain/LangGraph, CrewAI and AutoGen"
+readme = "README.md"
+license = "Apache-2.0"
+# >=3.11, not >=3.10. Every aimarket-agent release including 2.2.0 declares >=3.11, and this
+# package depends on it unconditionally, so a 3.10 promise can never be honoured — pip would
+# blame the *dependency* ("Package 'aimarket-agent' requires a different Python") instead of
+# refusing the interpreter cleanly. requires-python is frozen per release, so this is the kind
+# of thing that is free to fix now and impossible to fix after the upload.
+requires-python = ">=3.11"
+authors = [{ name = "AIMarket", email = "dev@modelmarket.dev" }]
+keywords = ["langchain", "langgraph", "crewai", "autogen", "agents", "tools", "aimarket", "mcp"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+# No "License :: OSI Approved ::" classifier. Under PEP 639 an SPDX `license` expression (above)
+# is the licence declaration, and pairing it with a classifier is redundant at best; under
+# setuptools it is a hard build error, which already broke a build in this repo once.
+# aimarket-agent's pyproject carries the same note — this package did not inherit it.
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+# The core carries no framework dependency at all: a LangGraph user must not be made to
+# install crewai, and crewai and autogen do not agree on a pydantic version — they were
+# installed into separate virtualenvs during development for exactly that reason. Each
+# adapter module imports its framework lazily and says what to install if it is missing.
+dependencies = [
+    # >=2.2, not >=2.1. 2.1.x verifies every receipt against the HUB's key, so it reports
+    # invalid-signature for all 42 federated capabilities, and it knows nothing of the v2
+    # canonical, so it reports the same for every rejection receipt — the two receipts a buyer
+    # most wants to check. This package carries its own resolver and does not depend on the
+    # SDK's, but a floor that admits a version known to answer wrongly is a floor that lies.
+    "aimarket-agent>=2.2,<3",
+    "httpx>=0.27,<1",
+    # >=2.7.2 because that is what the frameworks themselves floor at; <3 because a pydantic
+    # major would change model construction, which schema.py depends on directly.
+    "pydantic>=2.7.2,<3",
+]
+
+[project.optional-dependencies]
+# Bounded at both ends. Verified against langchain-core 1.5.2 / langgraph 1.2.10 /
+# crewai 1.15.8 / autogen 0.7.5 on 2026-07-29; the lower bounds are the majors those belong
+# to, and the upper bounds stop a major that changes how a tool declares its arguments —
+# which is precisely what each adapter is written against.
+langchain = ["langchain-core>=1.0,<2"]
+langgraph = ["langchain-core>=1.0,<2", "langgraph>=1.0,<2"]
+crewai = ["crewai>=1.0,<2"]
+autogen = ["autogen-core>=0.7,<1", "autogen-agentchat>=0.7,<1"]
+dev = ["pytest>=8", "pytest-asyncio>=0.24", "jsonschema>=4"]
+
+[project.urls]
+Homepage = "https://modelmarket.dev"
+# This is where the package will live — its own satellite repo, not yet pushed. It 404s today,
+# and Project-URL is frozen per release, so the ORDER matters rather than the URL: create the
+# repository (even empty) before or immediately after the first upload, because a dead link on the
+# PyPI page can be fixed by pushing the repo and can NOT be fixed by editing this line afterwards.
+# Pointing it at the aicom monorepo instead would have been permanently wrong for a package that
+# has its own home — which is why that edit was reverted.
+Repository = "https://github.com/alexar76/aimarket-bridges"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["aimarket_bridges"]
+
+# Allow-list, for the reason spelled out in oracles/core/pyproject.toml: with no sdist target,
+# hatchling's file set is "everything the nearest ancestor .gitignore does not exclude", and
+# that ancestor is not part of the package. Here it was the repo-root .gitignore — so the
+# sdist shipped a 209-line inventory of the private monorepo, naming the path of every secret
+# file in it. It was also the only thing keeping dist/ and .pytest_cache out of the tarball.
+[tool.hatch.build.targets.sdist]
+include = [
+    "/aimarket_bridges",
+    "/tests",
+    "/docs",
+    "/README.md",
+    "/LICENSE",
+    "/pyproject.toml",
+]
+# hatchling ships .gitignore in an sdist regardless of `include` — see the note in
+# oracles/core/pyproject.toml. Here it was the repo-ROOT .gitignore, 209 lines of it.
+exclude = ["/.gitignore"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# asyncio_mode is NOT declared here. No test in this package uses a bare `async def test_` —
+# the autogen suite drives coroutines through asyncio.run explicitly — so the option buys
+# nothing, and declaring it makes pytest warn "Unknown config option: asyncio_mode" for anyone
+# running the suite from the sdist without pytest-asyncio installed. A warning on a clean run
+# teaches the reader to ignore warnings.
