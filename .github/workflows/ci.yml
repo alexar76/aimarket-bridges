@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install (dev + adapters used in tests)
+        run: |
+          pip install -e ".[dev,langgraph,crewai,autogen]"
+
+      - name: Pytest + coverage badge
+        run: bash scripts/ci_coverage_badge.sh -- tests/ -q --tb=short --maxfail=5 --cov=aimarket_bridges
