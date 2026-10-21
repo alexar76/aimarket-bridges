@@ -12,6 +12,7 @@ test that bypassed it would pass while the real agent sent a payload the hub ref
 
 from __future__ import annotations
 
+import importlib.metadata
 import json
 import logging
 import threading
@@ -231,10 +232,17 @@ def test_a_raw_json_schema_cannot_build_a_fifth_of_this_catalogue(catalog):
         except Exception:
             rejected.append(cap.capability_id)
 
-    assert len(rejected) == 10
-    assert "fourier.verify@v1" in rejected and "fermat.route@v1" in rejected
     # every one of the 47 builds from Capability.args_model(), which is the point
     assert all(isinstance(c.args_model(), type) for c in catalog)
+    if not rejected:
+        # A newer crewai converts these unions itself. Building the model ourselves still works
+        # (asserted above); only the reason for it no longer reproduces on this version.
+        pytest.skip(
+            f"crewai {importlib.metadata.version('crewai')} builds every raw schema in this "
+            "catalogue; the fact this test records held on 1.15.8"
+        )
+    assert len(rejected) == 10
+    assert "fourier.verify@v1" in rejected and "fermat.route@v1" in rejected
 
 
 def test_capability_identity_is_preserved_by_pydantic(catalog):

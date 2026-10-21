@@ -12,6 +12,7 @@ no plugin mode keeps this file runnable in any of the framework venvs.
 from __future__ import annotations
 
 import asyncio
+import importlib.metadata
 import json
 import logging
 import threading
@@ -131,8 +132,17 @@ def test_a_pydantic_input_model_cannot_call_a_capability_named_lambda(by_id):
         input_model=cap.args_model(),
     )
     assert "lambda" in broken.parameters()["properties"]
-    with pytest.raises(TypeError, match="Missing required argument"):
+    try:
         asyncio.run(broken.invoke(arguments=FOURIER_ARGS))
+    except TypeError as exc:
+        assert "Missing required argument" in str(exc)
+        return
+    # Newer agent-framework-core releases call an aliased input model correctly. The raw-schema
+    # adapter is still right there (test below); only the reason for it no longer reproduces.
+    pytest.skip(
+        f"agent-framework-core {importlib.metadata.version('agent-framework-core')} calls an "
+        "aliased pydantic input model correctly; the fact this test records held on 1.15.0"
+    )
 
 
 def test_this_adapter_calls_the_same_capability_and_sends_the_real_name(by_id):
