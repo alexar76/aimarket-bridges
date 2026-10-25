@@ -82,6 +82,34 @@ def _capability(**over) -> Capability:
     return Capability(**base)
 
 
+class TestHostilePrices:
+    @pytest.mark.parametrize("price", ["NaN", "Infinity", "-Infinity", "free", -0.01, True, None])
+    def test_catalog_never_turns_an_invalid_price_into_a_free_tool(self, price):
+        hostile = {**TOOLS[0], "price_per_call_usd": price}
+        caps = fetch_catalog("https://hub.test", free_only=True,
+                             client=_client(manifest={"tools": [hostile]}))
+        assert caps == []
+
+    @pytest.mark.parametrize("price", [float("nan"), float("inf"), -0.01, True])
+    def test_direct_capability_cannot_poison_the_spend_counter(self, price):
+        agent = _FakeAgent()
+        with HubClient("https://hub.test", budget_usd=0.01, agent=agent,
+                       verify_receipts=False) as hub:
+            with pytest.raises(HubUnavailable, match="price must be finite"):
+                hub.invoke(_capability(price_usd=price), {})
+            assert hub.spent_usd == 0
+            assert agent.calls == []
+            hub.invoke(_capability(price_usd=0.01), {})
+            with pytest.raises(BudgetExceeded):
+                hub.invoke(_capability(price_usd=0.01), {})
+            assert len(agent.calls) == 1
+
+    @pytest.mark.parametrize("budget", [float("nan"), float("inf"), -0.01, True])
+    def test_invalid_budget_is_refused_before_constructing_a_client(self, budget):
+        with pytest.raises(ValueError, match="budget_usd must be finite"):
+            HubClient("https://hub.test", budget_usd=budget, agent=_FakeAgent())
+
+
 # ── schema, against every real input schema ──────────────────────────────────
 
 class TestSchemaAgainstTheRealCatalogue:

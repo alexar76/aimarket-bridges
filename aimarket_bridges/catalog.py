@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import json
 import logging
+import math
 import re
 from dataclasses import dataclass, field
 from typing import Any
@@ -230,9 +231,17 @@ def _record_to_capability(raw: dict[str, Any], taken: set[str]) -> Capability | 
         )
 
     try:
-        price = float(raw.get("price_per_call_usd") or 0.0)
-    except (TypeError, ValueError):
-        price = 0.0
+        raw_price = raw.get("price_per_call_usd", 0.0)
+        if isinstance(raw_price, bool):
+            raise ValueError("boolean price")
+        price = float(raw_price)
+        if not math.isfinite(price) or price < 0:
+            raise ValueError("non-finite or negative price")
+    except (TypeError, ValueError, OverflowError):
+        # A provider controls this field. Treating an unusable price as zero
+        # bypasses free_only; accepting NaN poisons the client's spend counter.
+        logger.warning("skipping %s: price_per_call_usd must be finite and nonnegative", capability_id)
+        return None
 
     return Capability(
         tool_name=tool_name_for(capability_id, taken=taken),

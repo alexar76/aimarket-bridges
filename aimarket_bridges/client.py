@@ -22,6 +22,7 @@ framework's own metadata channel and through `last_receipt`.
 from __future__ import annotations
 
 import logging
+import math
 import os
 import threading
 import uuid
@@ -131,6 +132,10 @@ class HubClient:
         # None = no ceiling. 0 = spend nothing. Not coerced with float(), which
         # would turn None into a TypeError and 0 into the old footgun.
         self.budget_usd = None if budget_usd is None else float(budget_usd)
+        if self.budget_usd is not None and (
+            isinstance(budget_usd, bool) or not math.isfinite(self.budget_usd) or self.budget_usd < 0
+        ):
+            raise ValueError("budget_usd must be finite and nonnegative, or None for no ceiling")
         self._spent = 0.0
         self._lock = threading.Lock()
         self.last_receipt: dict[str, Any] | None = None
@@ -216,7 +221,12 @@ class HubClient:
 
     def invoke(self, capability: Capability, arguments: dict[str, Any]) -> InvokeResult:
         """Call one capability. Raises only for what the model cannot fix."""
-        price = 0.0 if capability.is_free else capability.price_usd
+        try:
+            price = float(capability.price_usd)
+        except (TypeError, ValueError, OverflowError):
+            raise HubUnavailable("capability price must be finite and nonnegative") from None
+        if isinstance(capability.price_usd, bool) or not math.isfinite(price) or price < 0:
+            raise HubUnavailable("capability price must be finite and nonnegative")
         if price:
             self._reserve(price, capability.capability_id)
 
