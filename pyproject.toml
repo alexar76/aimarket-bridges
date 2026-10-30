@@ -6,7 +6,7 @@ name = "aimarket-bridges"
 # Bumped because the tree diverged from the published 0.1.0 wheel: `pip install
 # aimarket-bridges==0.1.0` served code this tree had already moved past, at the same version
 # string, so every fix in it was unpublishable and unreachable.
-version = "0.2.0"
+version = "0.2.1"
 description = "Use AIMarket capabilities as native tools in LangChain/LangGraph, CrewAI and AutoGen"
 readme = "README.md"
 license = "Apache-2.0"
